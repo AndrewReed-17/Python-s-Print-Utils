@@ -1,4 +1,5 @@
 """
+Robert Henning's, Python Print-Utils, 2026
 PrintUtils.py
 
 Utilities for CLI rendering using ANSI escape sequences.
@@ -12,7 +13,7 @@ Compatibility:
 - Requires ANSI-compatible terminal (Linux, macOS, modern Windows)
 
 Author: Robert Henning
-Licence : MIT
+Licence : MIT, 2026
 Repos : https://github.com/AndrewReed-17/Python-s-Print-Utils
 """
 
