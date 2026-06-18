@@ -1,5 +1,5 @@
 """
-Robert Henning's, Python Print-Utils (R4), 2026
+Robert Henning's, Python Print-Utils (R5), 2026
 PrintUtils.py
 
 Utilities for CLI rendering using ANSI escape sequences.
@@ -21,10 +21,13 @@ from __future__ import annotations
 
 import sys
 import time
+import os 
+import shutil
 from typing import Any, Dict, List
 
 
 __all__ = [
+    "get_terminal_size",
     "replace_with_void",
     "clear_progressbar",
     "progressbar",
@@ -37,6 +40,29 @@ __all__ = [
 # ---------------------------------------------------------------------------
 # Core ANSI utilities
 # ---------------------------------------------------------------------------
+
+def get_terminal_size() -> tuple :
+    """
+    Maid by R. H.
+    Date : 2026-06-18T14:35
+    Updated : 2026-06-18T14:35
+
+    Maid with IA : No
+    Assisted by IA : No
+
+    Credit : granitosaurus, https://www.reddit.com/r/Python/comments/5q7b36/getting_terminal_size_in_python/ 
+
+    Returns:
+        tuple: Colums by Width
+    """
+    try:
+        columns, rows = os.get_terminal_size(0)
+    except OSError:
+        columns, rows = os.get_terminal_size(1)
+
+    return columns, rows 
+
+COLS = get_terminal_size()[0]
 
 def replace_with_void(lines: int) -> None:
     """
@@ -152,7 +178,7 @@ def progressbar(max_value: int, value: int, start_time: float) -> None:
 # Structured printing
 # ---------------------------------------------------------------------------
 
-def print_dict(data: Dict[Any, Any], index = -1, limit: int = 80) -> None:
+def print_dict(data: Dict[Any, Any], index = -1, limit: int = COLS) -> None:
     """
     Pretty-print a dictionary or a sub-dictionary.
 
@@ -188,7 +214,7 @@ def print_dict(data: Dict[Any, Any], index = -1, limit: int = 80) -> None:
         print(line)
 
 
-def print_list(data: List[Any], index: int = -1, limit: int = 80) -> None:
+def print_list(data: List[Any], index: int = -1, limit: int = COLS) -> None:
     """
     Pretty-print a list or a nested list.
 
@@ -217,7 +243,7 @@ def print_list(data: List[Any], index: int = -1, limit: int = 80) -> None:
 # Structured string
 # ---------------------------------------------------------------------------
 
-def string_dict(data: Dict[Any, Any], index = -1, limit: int = 80) -> str:
+def string_dict(data: Dict[Any, Any], index = -1, limit: int = COLS) -> str:
     """
     Pretty-print a dictionary or a sub-dictionary.
 
@@ -254,7 +280,7 @@ def string_dict(data: Dict[Any, Any], index = -1, limit: int = 80) -> str:
         string = string + line + "\n"
     return string
 
-def string_list(data: List[Any], index: int = -1, limit: int = 80) -> str:
+def string_list(data: List[Any], index: int = -1, limit: int = COLS) -> str:
     """
     Pretty-print a list or a nested list.
 
