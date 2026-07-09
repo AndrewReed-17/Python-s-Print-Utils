@@ -1,5 +1,5 @@
 """
-Robert Henning's, Python Print-Utils (R5), 2026
+Robert Henning's, Python Print-Utils (R5b), 2026
 PrintUtils.py
 
 Utilities for CLI rendering using ANSI escape sequences.
@@ -27,6 +27,7 @@ from typing import Any, Dict, List
 
 
 __all__ = [
+    #"menue_mk_i",
     "get_terminal_size",
     "replace_with_void",
     "clear_progressbar",
@@ -36,7 +37,42 @@ __all__ = [
     "print_list",
 ]
 
+# ---------------------------------------------------------------------------
+# ANSI Coded G-UI
+# ---------------------------------------------------------------------------
 
+def menue_mk_i(tpl_terminal_size:tuple,
+               str_name:str,
+               dict_options:dict,
+               str_message:str="",
+               int_select:bool=False,
+               int_mutliple:bool=False
+               ) -> None :
+    """
+    WIP
+
+    Parameters
+        ----------
+        tpl_terminal_size : tuple, cols by rows
+        str_name : string, the name of the menue
+        dict_options : a dictionary of Name by a tuple of func follewed by the key associeted with ; the key is non nessacry of you have the Select mode on.
+        str_message : [FAC] it is a message, maybe to help, or other things, THE LIST OF OPTIONS WILL BE AUTOMACLY DISPLAYED.
+        int_select : [FAC, False] True to enable the selection (on/off) mode.
+        int_mutliple : [FAC, False] True to enable the multiple selection mode ; require the select mode on.
+    """
+    clear_cli()
+
+    return
+
+
+def deg_place_corner(terminal_size:tuple) -> None :
+    default_pos = 0
+    print(f"\033[{default_pos};{default_pos}HT-L") #Top Left
+    print(f"\033[{default_pos};{terminal_size[0]}HR") #Top Right
+    print(f"\033[{terminal_size[1]-1};{default_pos}HB-L") #Bottom Left
+    print(f"\033[{terminal_size[1]-1};{terminal_size[0]}HR") #Bottom Right
+    return
+    
 # ---------------------------------------------------------------------------
 # Core ANSI utilities
 # ---------------------------------------------------------------------------
